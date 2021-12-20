@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class AiB {
+
+    public static Scanner input = new Scanner(System.in);
+    public static int n = input.nextInt();
+    public static int[] my_array = new int[n + 1];
+    public static int count = n;
+
+        public static void main(String[] args) {
+            if (n == 1) System.out.println(1);
+            else {
+                for (int i = 1; i <= n; i++) {
+                    my_array[i] = i;
+                }
+                while (count != 1) {
+                    removeEvenIndexes();
+                    removeOddIndexes();
+                    removeDivisibleByThreeIndexes();
+                }
+                System.out.println(my_array[1]);
+            }
+            input.close();
+        }
+
+        public static void removeEvenIndexes() {
+            int cnt = 0;
+            for (int i = 1; i < my_array.length; i++) {
+                if (count == 1) break;
+                if (i % 2 == 0) {
+                    my_array[i] = 0; count--;
+                    cnt++;
+                }
+            }
+            resize(cnt);
+        }
+
+        public static void removeOddIndexes() {
+            int cnt = 0;
+            for (int i = 1; i < my_array.length; i++) {
+                if (count == 1) break;
+                if (i % 2 != 0) {
+                    my_array[i] = 0; count--;
+                    cnt++;
+                }
+            }
+            resize(cnt);
+        }
+
+        public static void removeDivisibleByThreeIndexes() {
+            int cnt = 0;
+            for (int i = 1; i < my_array.length; i++) {
+                if (count == 1) break;
+                if (i % 3 == 0) {
+                    my_array[i] = 0; count--;
+                    cnt++;
+                }
+            }
+            resize(cnt);
+        }
+
+        private static void resize(int cnt) {
+            if (cnt != 0) {
+                int[] holder = new int[my_array.length - cnt];
+                for (int i = 1, j = 1; i < my_array.length; i++) {
+                    if (my_array[i] != 0) {
+                        holder[j] = my_array[i];
+                        j++;
+                    }
+                }
+                my_array = holder;
+            }
+        }
+    }
