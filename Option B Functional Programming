@@ -1,0 +1,28 @@
+removeEvenIndexes:: [Int] -> [Int]
+removeEvenIndexes var
+    | (length var)<2=var
+    | otherwise =[x | (i,x) <-zip [1..] var, even i]    
+removeOddIndexes:: [Int] -> [Int]
+removeOddIndexes var
+    | (length var)<2=var
+    | otherwise = [x | (i,x) <- zip [1..] var, odd i]    
+divisibleBy3 :: [Int] -> [Int]
+divisibleBy3 var
+    | (length var) <2 =var
+    | otherwise = [x | (i,x)<-zip[1..] var, i `mod` 3/=0]    
+fun var =divisibleBy3 (removeEvenIndexes (removeOddIndexes var ) )
+
+while :: [Int] -> Int
+while var
+    |(tail var /=[] )=while (fun var)
+    | otherwise = var!!0
+    
+main :: IO ()
+main =do
+    input <- getLine
+    let n =read input :: Int
+    let my_array =[1,2 ..n]
+    
+    let resized= while(my_array)
+    
+    print resized
